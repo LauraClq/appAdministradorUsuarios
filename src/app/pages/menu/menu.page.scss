@@ -1,0 +1,44 @@
+.btn-cerrar {
+  color: #fff;
+  padding: 20px 30px 20px 30px;
+  font-size: 15px;
+}
+
+#container {
+  text-align: center;
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+ion-title {
+  color: #fff;
+}
+
+.centrado {
+  width: 100vw;
+  height: 100vh;
+  flex: auto;
+  align-items: center;
+}
+
+body {
+  position: relative;
+  overflow: hidden; // Asegura que el pseudo-elemento no se desborde
+  background-color: #52e0f3;
+  background-image: linear-gradient(160deg, #52e0f3 0%, #8abfe9 100%);
+}
+
+ion-content {
+  --background-color: #52e0f3;
+  --background-image: linear-gradient(160deg, #52e0f3 0%, #8abfe9 100%);
+  --background: var(--background-color) var(--background-image);
+}
+
+ion-item {
+  border-style: solid;
+  border-color: blue;
+  border-width: medium;
+}

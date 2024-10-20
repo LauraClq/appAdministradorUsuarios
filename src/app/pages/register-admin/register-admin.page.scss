@@ -1,0 +1,47 @@
+ion-content {
+  --background-color: #52e0f3;
+  --background-image: linear-gradient(160deg, #52e0f3 0%, #8abfe9 100%);
+  --background: var(--background-color) var(--background-image);
+}
+
+.form-container {
+  background-color: #ffffffe0;
+  padding: 20px;
+  border-radius: 10px;
+  ion-icon {
+    margin-right: 6px;
+    width: 30px;
+  }
+}
+
+.ion-avatar {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto;
+}
+
+.photo-btn {
+  position: relative;
+  bottom: 25px;
+}
+
+.image-icon {
+  font-size: 100px;
+  opacity: 30%;
+}
+
+#iconCerrar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  zoom: 2.5;
+}
+
+//si esta acrivo el scanner se oculta todo
+.scanner-activo {
+  --background: transparent;
+  --ion-background-color: transparent;
+  visibility: hidden;
+  --ion-background: transparent;
+}
+

@@ -1,0 +1,246 @@
+<ion-header [translucent]="true" [ngClass]="scanActive?'scanner-activo':''">
+  <ion-toolbar style="--background: #48aeff">
+    <ion-title><strong>REGISTRO USUARIO</strong></ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding-top ion-text-center"  [ngClass]="scanActive?'scanner-activo':''"
+  noscroll>
+ <!-- *************************** BOTONES FLOTANTES *************************** -->
+  <ion-fab vertical="top" horizontal="start" slot="fixed" [ngClass]="scanActive?'scanner-activo':''">
+    <ion-fab-button color="secondary">
+      <ion-icon name="add-circle"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="bottom">
+      <ion-fab-button (click)="cerrarSesion()">
+        <ion-icon name="exit-sharp" style="
+            color: rgb(209, 35, 35);
+            background: rgb(255, 255, 255);">
+        </ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="irMenu()">
+        <ion-icon name="list"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="startScanner()">
+        <ion-icon name="barcode-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+  
+  <!--FORMULARIO DE REGISTRO-->
+  <ion-card-content [ngClass]="scanActive?'scanner-activo':''">
+    <div class="form-container">
+      <form [formGroup]="formRegistro" (ngSubmit)="registro()">
+        <!--FOTO DE PERFIL-->
+        <ion-avatar class="ion-avatar" *ngIf="formRegistro.value.perfilImagen">
+          <img [src]="formRegistro.value.perfilImagen" alt="foto-perfil" />
+        </ion-avatar>
+
+        <!--SOLO SE MUESTRA SI HUBO UN ERROR EN OBTENER LA IMAGEN-->
+        <ion-icon
+          *ngIf="!formRegistro.value.perfilImagen"
+          name="image-outline"
+          class="image-icon"
+        ></ion-icon>
+        <br>
+
+        <!--BOTON PARA TOMAR O SELECCIONAR UNA IMAGEN--->
+        <ion-button (click)="tomarFoto()" mode="ios" size="small" shape="round">
+          <ion-icon name="camera-outline"></ion-icon>
+        </ion-button>
+
+        <!--INPUT APELLIDO/S-->
+        <ion-item class="custom-input">
+          <ion-icon
+            name="person-outline"
+            style="color: var(--ion-color-primary-tint)"
+          ></ion-icon>
+          <ion-input
+            type="text"
+            name="nombre"
+            id="nombre"
+            placeholder="Ingrese su nombre/s"
+            formControlName="nombre"
+          ></ion-input>
+        </ion-item>
+
+        <ion-note
+          class="validators"
+          *ngIf="( formRegistro.controls['nombre'].hasError('pattern') || formRegistro.controls['nombre'].hasError('required')) && formRegistro.controls['nombre'].touched"
+        >
+          Error, debe ingresar su nombre y solo se permite letras
+        </ion-note>
+
+        <!--INPUT NOMBRE/S-->
+        <ion-item class="custom-input">
+          <ion-icon
+            name="person-outline"
+            style="color: var(--ion-color-primary-tint)"
+          ></ion-icon>
+          <ion-input
+            type="text"
+            name="apellido"
+            id="apellido"
+            placeholder="Ingrese su apellido/s"
+            formControlName="apellido"
+          ></ion-input>
+        </ion-item>
+
+        <ion-note
+          class="validators"
+          *ngIf="( formRegistro.controls['apellido'].hasError('pattern') || formRegistro.controls['apellido'].hasError('required')) && formRegistro.controls['apellido'].touched"
+        >
+          Error, debe ingresar un apellido/s y solo se permite letras
+        </ion-note>
+
+        <!--INPUT DNI-->
+        <ion-item class="custom-input">
+          <ion-icon
+            name="finger-print"
+            style="color: var(--ion-color-primary-tint)"
+          ></ion-icon>
+          <ion-input
+            type="number"
+            name="dni"
+            id="dni"
+            placeholder="Ingrese su N° DNI"
+            formControlName="dni"
+          ></ion-input>
+        </ion-item>
+
+        <ion-note
+          class="validators"
+          *ngIf="( formRegistro.controls['dni'].hasError('pattern') || formRegistro.controls['dni'].hasError('required')) && formRegistro.controls['dni'].touched"
+        >
+          Error, el dni debe tener 8 números.
+        </ion-note>
+
+        <!--INPUT CORREO-->
+        <ion-item class="custom-input">
+          <ion-icon
+            name="mail-outline"
+            style="color: var(--ion-color-primary-tint)"
+          ></ion-icon>
+          <ion-input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Ingrese su correo electrónico"
+            formControlName="email"
+          ></ion-input>
+        </ion-item>
+
+        <ion-note
+          class="validators"
+          *ngIf="(formRegistro.controls['email'].hasError('email') || formRegistro.controls['email'].hasError('required')) && formRegistro.controls['email'].touched"
+        >
+          Error, debe ingresar un correo válido
+        </ion-note>
+
+        <!--INPUT PASSWORD-->
+        <ion-item class="custom-input">
+          <ion-icon
+            name="key-outline"
+            style="color: var(--ion-color-primary-tint)"
+          ></ion-icon>
+          <ion-input
+            type="{{type}}"
+            name="password"
+            id="password"
+            placeholder="Ingrese su contraseña"
+            formControlName="password"
+          ></ion-input>
+          <ion-button
+            *ngIf="isPassword"
+            (click)="mostrarOcultarPassword()"
+            expand="end"
+            fill="clear"
+            shape="none"
+          >
+            <ion-icon
+              slot="icon-only"
+              [name]="hide ? 'eye-outline' : 'eye-off-outline' "
+              class="eye-icon"
+              style="color: var(--ion-color-primary-tint)"
+            ></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        <ion-note
+          class="validators"
+          *ngIf="(formRegistro.controls['password'].hasError('required')) && formRegistro.controls['password'].touched"
+        >
+          Error, debe ingresar una contraseña
+        </ion-note>
+        <ion-note
+          class="validators"
+          *ngIf="(formRegistro.controls['password'].hasError('minlength')) && formRegistro.controls['password'].touched"
+        >
+          La contraseña debe tener como minimo de 5 caracteres
+        </ion-note>
+        <ion-note
+          class="validators"
+          *ngIf="(formRegistro.controls['password'].hasError('maxlength')) && formRegistro.controls['password'].touched"
+        >
+          La contraseña debe tener como maximo de 10 caracteres
+        </ion-note>
+
+        <!--INPUT PASSWORD REPETIR-->
+        <ion-item class="custom-input">
+          <ion-icon
+            name="key-outline"
+            style="color: var(--ion-color-primary-tint)"
+          ></ion-icon>
+          <ion-input
+            type="{{type}}"
+            name="passwordRep"
+            id="passwordRep"
+            placeholder="Repetir su contaseña"
+            formControlName="passwordRep"
+          ></ion-input>
+          <ion-button
+            *ngIf="isPassword"
+            (click)="mostrarOcultarPassword()"
+            expand="end"
+            fill="clear"
+            shape="none"
+          >
+            <ion-icon
+              slot="icon-only"
+              [name]="hide ? 'eye-outline' : 'eye-off-outline' "
+              class="eye-icon"
+              style="color: var(--ion-color-primary-tint)"
+            ></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        <ion-note
+          class="validators"
+          *ngIf="
+          formRegistro.controls['password'].value !== formRegistro.controls['passwordRep'].value &&
+          formRegistro.controls['passwordRep'].touched"
+        >
+          Error, las contraseñas deben coincidir
+        </ion-note>
+
+        <ion-button
+          expand="block"
+          type="submit"
+          class="submit"
+        >
+          Registrarse
+        </ion-button>
+      </form>
+    </div>
+   <div *ngIf="scannedDni">
+  <p>{{scannedDni}}</p>
+</div>
+  </ion-card-content>
+ <!-- *************************** VISTA DEL SPINNER *************************** -->
+    <ion-spinner *ngIf="pressedButton" color="blue" name="lines-sharp-small" style="
+      display: inherit;
+      margin: auto;
+      width: 3cm;
+      height: 3cm;
+      margin-top: 2rem;
+    "></ion-spinner>
+</ion-content>

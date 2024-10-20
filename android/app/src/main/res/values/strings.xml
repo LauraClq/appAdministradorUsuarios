@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Administración</string>
+    <string name="title_activity_main">Administración</string>
+    <string name="package_name">com.administrador.app</string>
+    <string name="custom_url_scheme">com.administrador.app</string>
+</resources>

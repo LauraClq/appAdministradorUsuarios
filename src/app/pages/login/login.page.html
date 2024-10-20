@@ -1,0 +1,69 @@
+<body class="centrado">
+  <div class="container">
+    <ion-card-header>
+      <img src="../../../assets/icono-logo.png" class="logo">
+    </ion-card-header>
+    <ion-card-content>
+      <div class="form-container">
+          <form [formGroup]="formLogin" (ngSubmit)="iniciarSesion()">
+
+            <ion-item class="custom-input">
+              <ion-icon name="mail-outline" style="color: var(--ion-color-primary-tint);"></ion-icon>
+              <ion-input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Ingrese su correo electrónico"
+                formControlName="email"
+              ></ion-input>
+            </ion-item>
+     
+          <ion-note class="validators" *ngIf="(formLogin.controls['email'].hasError('email') || formLogin.controls['email'].hasError('required')) && formLogin.controls['email'].touched">
+            Error, debe ingresar un correo válido
+          </ion-note>
+
+          <ion-item class="custom-input">
+            <ion-icon name="key-outline" style="color: var(--ion-color-primary-tint);"></ion-icon>
+            <ion-input
+              type="{{type}}"
+              name="password"
+              id="password"
+              placeholder="Ingrese su contraseña"
+              formControlName="password"
+            ></ion-input>
+            <ion-button *ngIf="isPassword" (click)="mostrarOcultarPassword()" expand="end" fill="clear" shape="none">
+              <ion-icon slot="icon-only" [name]="hide ? 'eye-outline' : 'eye-off-outline' " class="eye-icon" style="color: var(--ion-color-primary-tint);"></ion-icon> 
+            </ion-button>
+          </ion-item>
+
+          <ion-note class="validators" *ngIf="(formLogin.controls['password'].hasError('required')) && formLogin.controls['password'].touched">
+            Error, debe ingresar una contraseña
+          </ion-note>
+          <ion-note class="validators" *ngIf="(formLogin.controls['password'].hasError('minlength')) && formLogin.controls['password'].touched">
+            La contraseña debe tener como minimo de 5 caracteres
+          </ion-note>
+          <ion-note class="validators" *ngIf="(formLogin.controls['password'].hasError('maxlength')) && formLogin.controls['password'].touched">
+            La contraseña debe tener como maximo de 10 caracteres
+          </ion-note>
+        
+          <ion-button expand="block" type="submit" class="submit" [disabled]="formLogin.invalid">
+            Iniciar Sesión
+          </ion-button>
+          </form>
+      </div>
+    </ion-card-content>
+  </div>
+</body>
+<ion-segment value="buttons" color="light" style="background-color: rgb(75, 159, 255);">
+  <ion-segment-button value="default" (click)="loginAutomatico('admin')">
+    <ion-icon name="person-add"></ion-icon><ion-label>Admin</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="segment" (click)="loginAutomatico('invitado')">
+    <ion-icon name="person-circle"></ion-icon><ion-label>Invitado</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="buttons" (click)="loginAutomatico('anonimo')">
+    <ion-icon name="glasses"></ion-icon><ion-label>Anonimo</ion-label>
+  </ion-segment-button>
+</ion-segment>
+
+

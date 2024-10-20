@@ -1,0 +1,100 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+
+.validators {
+    color: var(--ion-color-danger);
+    font-size: 13px;
+    text-align: center;
+    display: block; /* Asegura que el contenedor del mensaje de error se muestre como un bloque */
+    width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+}
+
+.custom-input {
+    --border-color: #3060DB;
+    --border-style: solid;
+    --border-width: 1px;
+    margin: 1em auto 1em;
+    border-radius: 15px;
+    --ion-item-background: transparent !important;
+}
+
+.submit {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.d-flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.product-item {
+    --padding-top: 20px;
+
+    ion-avatar {
+         width: 140px;
+        height: 140px;
+        --border-radius: 15px;
+    }
+
+    .name {
+        font-weight: 600;
+        padding-bottom: 5px;
+        font-size: 25px;
+    }
+
+    .data {
+        font-size: 15px;
+
+        strong {
+            font-weight: 500;
+        }
+    }
+
+    .option-btn {
+        font-size: 27px;
+    }
+
+    ion-chip {
+        font-size: 18px;
+        border-radius: 10px;
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}

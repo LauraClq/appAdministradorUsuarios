@@ -1,0 +1,42 @@
+.container {
+    text-align: center;
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 13vh;
+}
+
+.centrado {
+    width: 100vw;
+    height: 100vh;
+    flex: auto;
+    align-items: center;
+}
+  
+body {
+    position: relative;
+    overflow: hidden; // Asegura que el pseudo-elemento no se desborde
+    background-color: #52e0f3;
+    background-image: linear-gradient(160deg, #52e0f3 0%, #8abfe9 100%);
+}
+
+.form-container{
+    background-color: #ffffffe0;
+    padding: 20px;
+    border-radius: 10px;
+    ion-icon{
+        margin-right: 6px;
+        width: 30px;
+    }
+}
+
+.logo{
+  width: 30vh;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+ion-segment{
+    position: fixed !important;
+}
